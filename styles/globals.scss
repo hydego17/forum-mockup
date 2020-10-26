@@ -1,0 +1,23 @@
+@import "_lib.scss";
+@import "_header.scss";
+@import "_comments.scss";
+@import "_main.scss";
+
+.container {
+  padding: 0.75rem 0.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.grid-container {
+  @media screen and(min-width:1023px) {
+    display: grid;
+    grid-template-columns: 70% 30%;
+  }
+}
+aside {
+  padding: 1rem 0.5rem;
+}
+
+.komentar {
+}

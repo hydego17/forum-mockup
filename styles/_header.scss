@@ -1,0 +1,25 @@
+@import "_lib.scss";
+
+.nav_header {
+  color: $Gray_Light;
+
+  background-color: $Brown;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  ul {
+    display: none;
+    align-items: center;
+    @media screen and (min-width: 875px) {
+      display: flex;
+    }
+
+    li {
+      padding: 0 0.5rem;
+    }
+  }
+}
