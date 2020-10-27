@@ -2,6 +2,7 @@
 @import "_header.scss";
 @import "_comments.scss";
 @import "_main.scss";
+@import "_modal.scss";
 
 .container {
   padding: 0.75rem 0.5rem;
@@ -17,7 +18,4 @@
 }
 aside {
   padding: 1rem 0.5rem;
-}
-
-.komentar {
 }

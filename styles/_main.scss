@@ -1,8 +1,11 @@
 main {
   border-right: $Border;
 
-  article h1 {
-    padding: 1rem 0;
+  article {
+    padding-right: 20px;
+    h1 {
+      padding: 1rem 0;
+    }
   }
 
   section {
@@ -11,13 +14,15 @@ main {
 }
 
 .form-comment {
+  padding-right: 20px;
   margin: 0.5rem 0;
   display: flex;
   flex-direction: column;
   input {
+    border-radius: 5px;
     border: 1px solid $Gray;
     margin-top: 0.5rem;
-    padding: 0.5rem;
+    padding: 10px;
   }
   textarea {
     border: 1px solid $Gray;

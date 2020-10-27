@@ -1,11 +1,12 @@
 @import "_lib.scss";
 
 .nav_header {
-  color: $Gray_Light;
-
+  color: $White;
   background-color: $Brown;
+  transition: all 1s ease;
 
   .container {
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,7 +20,52 @@
     }
 
     li {
-      padding: 0 0.5rem;
+      padding: 10px 16px;
+    }
+  }
+}
+
+// Dropdown
+.dropdown {
+  float: left;
+  overflow: hidden;
+
+  &:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropbtn {
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: $White;
+    padding: 10px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+
+  .dropdown-content {
+    font-size: 15px;
+    display: none;
+    position: absolute;
+    transform: translateX(10%);
+    background-color: $Brown_Dark;
+
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    a {
+      float: none;
+      color: $White;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      &:hover {
+        background-color: $Brown;
+      }
     }
   }
 }
