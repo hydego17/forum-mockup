@@ -1,9 +1,20 @@
-h2 {
-  padding: 1rem 0;
-}
 .comment-section {
+  font-size: 15px;
+  line-height: 1.4rem;
   padding: 0.5rem;
+
+  ._cmm,
+  ._rpl {
+    display: grid;
+    grid-template-columns: 11% auto;
+
+    small:last-child {
+      display: block;
+      padding: 0.75rem 0;
+    }
+  }
+
   .reply-section {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem 0.5rem 5rem;
   }
 }

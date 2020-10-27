@@ -1,4 +1,5 @@
 import React from "react"
+import Link from "next/link"
 import Modal from "./Modal"
 
 export default function Header() {
@@ -11,7 +12,12 @@ export default function Header() {
     <>
       <nav className="nav_header">
         <div className="container">
-          <h2 className="brand">Forum anak IT</h2>
+          <Link href="/">
+            <a>
+              <p className="brand">Forum anak IT</p>
+            </a>
+          </Link>
+
           {/* Searchbox & menu */}
           <form action="">
             <input className="inputsearch" type="text" placeholder="Search.." />

@@ -4,7 +4,7 @@ export default function Aside() {
   return (
     <aside>
       <h3>Diskusi teratas</h3>
-      <ol style={{ padding: "1rem" }}>
+      <ul>
         <li>
           {" "}
           <a href="#">Bersihkan laptop dari butiran debu</a>{" "}
@@ -29,7 +29,7 @@ export default function Aside() {
             Tutorial langkah-langkah mencegah website untuk track user
           </a>{" "}
         </li>
-      </ol>
+      </ul>
     </aside>
   )
 }
