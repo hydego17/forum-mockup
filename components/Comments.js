@@ -1,7 +1,27 @@
-import React from "react"
-import comments from "../data/comments.json"
+import { useState, useEffect } from "react"
+import data from "../data/data.json"
+import { createServer } from "miragejs"
+
+// Mock server from Mirage JS to populate JSON Data
+createServer({
+  routes() {
+    this.get("/api/comments", () => ({
+      comments: [data],
+    }))
+  },
+})
 
 export default function Comments() {
+  let [comments, setComments] = useState([])
+
+  useEffect(() => {
+    fetch("/api/comments")
+      .then((res) => res.json())
+      .then((json) => {
+        setComments(json.comments[0])
+      })
+  }, [])
+
   return (
     <section className="komentar">
       <h2>Komentar</h2>

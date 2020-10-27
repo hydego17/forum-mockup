@@ -16,5 +16,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "sass": "^1.27.0"
+  },
+  "devDependencies": {
+    "miragejs": "^0.1.41"
   }
 }
