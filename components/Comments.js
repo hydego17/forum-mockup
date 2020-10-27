@@ -1,8 +1,21 @@
 import { useState, useEffect } from "react"
-import comments from "../data/data.json"
 import { createServer } from "miragejs"
+import fetch from "isomorphic-unfetch"
 
 export default function Comments() {
+  const [comments, setComments] = useState([])
+
+  useEffect(() => {
+    async function loadData() {
+      const response = await fetch(
+        "https://my-json-server.typicode.com/hydego17/sampledata/comments"
+      )
+      const getComments = await response.json()
+      setComments(getComments)
+    }
+    loadData()
+  }, [])
+
   return (
     <fieldset>
       <legend>
