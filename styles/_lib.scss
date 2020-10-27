@@ -4,7 +4,7 @@ $Green: #33b95a;
 $Red: #ff5f2d;
 $Gray: #dddddd;
 $Gray_Light: #eeeeee;
-$White: #f3f3f3;
+$White: #f5f5f5;
 $Black: #333333;
 
 $Border: 2px solid $Gray_Light;
@@ -34,10 +34,30 @@ ul {
 
 h1 {
   line-height: 2.5rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 h2 {
-  display: inline;
-  font-size: 2rem;
+  font-size: 1.5rem;
+}
+
+form {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.btn {
+  background-color: $Gray;
+  margin: 1rem 0.5rem 1rem 0;
+  border: none;
+  padding: 0.75rem 1rem !important;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.btn-brown {
+  color: $White;
+  background-color: $Brown_Dark;
 }

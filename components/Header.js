@@ -11,11 +11,12 @@ export default function Header() {
     <>
       <nav className="nav_header">
         <div className="container">
-          <h2>Forum anak IT</h2>
+          <h2 className="brand">Forum anak IT</h2>
           {/* Searchbox & menu */}
           <form action="">
-            <input type="text" placeholder="Search.." />
+            <input className="inputsearch" type="text" placeholder="Search.." />
           </form>
+
           <ul className="topnav">
             <div className="dropdown">
               <li>

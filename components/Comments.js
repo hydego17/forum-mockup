@@ -1,11 +1,11 @@
 import React from "react"
-import comments from "./comments.json"
+import comments from "../data/comments.json"
 
 export default function Comments() {
   return (
     <section className="komentar">
       <h2>Komentar</h2>
-      <hr />
+
       {comments
         ? comments.map((comment) => {
             const { author, date, message, point, replies, id } = comment
