@@ -72,19 +72,6 @@ form {
   display: flex;
 }
 
-.btn {
-  background-color: $Gray;
-  margin: 1rem 0.5rem 1rem 0;
-  border: none;
-  padding: 0.75rem 1rem !important;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.btn-brown {
-  color: $White;
-  background-color: $Brown_Dark;
-}
-
 input,
 textarea {
   font-family: inherit;

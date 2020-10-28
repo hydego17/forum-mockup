@@ -24,19 +24,9 @@
     display: inline-block;
     border: 1px solid #ccc;
   }
-
-  button {
-    background-color: $Brown_Dark;
-    color: white;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
-  button:hover {
-    background-color: $Brown;
+  .errors-login {
+    display: block;
+    color: red;
   }
 }
 
