@@ -9,13 +9,14 @@
     font-weight: bolder;
     font-size: 1.5rem;
     padding: 1rem 0;
-    min-width: 200px;
+    min-width: 170px;
   }
 
   .container {
     padding: 0 0.5rem;
-    display: flex;
+    display: grid;
     align-items: center;
+    grid-template-columns: 170px auto 30%;
   }
 
   ul {
