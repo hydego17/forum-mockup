@@ -2,8 +2,11 @@
 @import "_NavMenu.scss";
 
 .nav_header {
+  position: fixed;
+  width: 100%;
   color: $White;
   background-color: $Brown;
+  z-index: 5;
 
   .brand {
     font-weight: bolder;

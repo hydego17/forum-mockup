@@ -12,7 +12,8 @@
 }
 
 .grid-container {
-  @media screen and(min-width:1023px) {
+  padding-top: calc(1rem + 10vh);
+  @media screen and(min-width: 1023px) {
     display: grid;
     grid-template-columns: 70% 30%;
   }

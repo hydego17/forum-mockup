@@ -75,36 +75,34 @@ export default function Header() {
 
       {/* Responsive Menu */}
       <div className={"nav_menu " + (openMenu ? "open_nav" : "")}>
-        <form action="">
-          <input className="inputsearch" type="text" placeholder="Search.." />
-        </form>
-
-        <ul className="topnav">
-          <div className="dropdown">
-            <li>
-              <button className="dropbtn" href="#">
-                Categories
-              </button>
-            </li>
-            <div className="dropdown-content">
-              <a href="#">Linux</a>
-              <a href="#">Windows</a>
-              <a href="#">Mac OS</a>
-              <a href="#">Android</a>
-              <a href="#">IOS</a>
+        <div className="__resp_container">
+          <form>
+            <input className="inputsearch" type="text" placeholder="Search.." />
+            <FontAwesomeIcon icon={faSearch} className="search_icon" />
+          </form>
+          <ul>
+            <a>
+              <li>Categories </li>
+            </a>
+            <div className="__dropdown">
+              <li>Linux</li>
+              <li>Windows</li>
+              <li>Mac OS</li>
+              <li>Android</li>
+              <li>IOS</li>
             </div>
-          </div>
 
-          <li>
-            {" "}
-            <a onClick={handleModal}>login</a>
-          </li>
-          <li>
-            {" "}
-            <a href="#">Contact</a>
-          </li>
-        </ul>
+            <a onClick={handleModal}>
+              <li>login</li>
+            </a>
+            <a href="#">
+              <li> Contact </li>
+            </a>
+          </ul>
+        </div>
       </div>
+
+      {/* Login Modal */}
       <Modal openModal={openModal} setOpenModal={setOpenModal} />
     </>
   )

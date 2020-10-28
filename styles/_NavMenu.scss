@@ -4,14 +4,61 @@
   @media screen and (min-width: 876px) {
     display: none;
   }
-
   position: fixed;
+  padding-top: 5rem;
   right: 0;
-  background-color: $Brown_Dark;
+  background-color: $Black;
+  color: $White;
   height: 100vh;
   width: 0px;
   float: right;
   transition: all 0.5s ease;
+
+  // Inner Container
+  .__resp_container {
+    padding: 0 2rem;
+
+    // Menu List
+
+    ul {
+      padding-top: 1.5rem;
+      text-align: right;
+
+      .__dropdown {
+        padding: 1rem;
+      }
+
+      li {
+        padding: 0.5rem 1rem;
+        transition: all 0.1s ease;
+        &:hover {
+          background-color: $Brown;
+        }
+      }
+    }
+
+    // Form & Search Box
+    form {
+      display: flex;
+      align-items: center;
+
+      .search_icon {
+        cursor: pointer;
+        position: relative;
+        left: -25px;
+        color: $Brown_Dark;
+      }
+
+      input {
+        width: 100%;
+        background-color: #dfdfdf;
+        border-radius: 5px;
+        width: 100%;
+        padding: 10px 20px;
+        border: 1px solid rgb(139, 139, 139);
+      }
+    }
+  }
 }
 
 .open_nav {
