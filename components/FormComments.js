@@ -5,8 +5,11 @@ import { useForm } from "react-hook-form"
 export default function FormComments() {
   // Form Validation
   const { register, handleSubmit, errors } = useForm()
-  const onSubmit = (data) => console.log(data)
-  const router = useRouter()
+
+  const onSubmit = (data) => {
+    console.log(data)
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="form-comment">
