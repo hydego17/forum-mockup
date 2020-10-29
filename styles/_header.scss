@@ -75,10 +75,6 @@
   float: left;
   overflow: hidden;
 
-  &:hover .dropdown-content {
-    display: block;
-  }
-
   .dropbtn {
     cursor: pointer;
     font-size: 16px;
@@ -91,13 +87,18 @@
     margin: 0;
   }
 
-  .dropdown-content {
-    font-size: 15px;
-    display: none;
-    position: absolute;
-    transform: translateX(10%);
-    background-color: $Brown_Dark;
+  &:hover .dropdown-content {
+    transition: all 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+  }
 
+  .dropdown-content {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    background-color: $Brown_Dark;
+    font-size: 15px;
     min-width: 150px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
     z-index: 1;
