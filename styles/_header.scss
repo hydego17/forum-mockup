@@ -16,12 +16,11 @@
   }
 
   .nav_search {
+    align-items: center;
     display: none;
     @media screen and (min-width: 875px) {
       display: flex;
     }
-
-    align-items: center;
 
     input {
       background-color: #afa69b;

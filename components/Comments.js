@@ -20,6 +20,19 @@ export default function Comments() {
     newVoted[index] = !newVoted[index]
     setIsVoted(newVoted)
   }
+
+  // DownVote Comments
+  const downVote = (id, index) => {
+    newComments.map((c) => {
+      if (id === c.id) {
+        c.point -= 1
+      }
+    })
+    setComments(newComments)
+    newVoted[index] = !newVoted[index]
+    setIsVoted(newVoted)
+  }
+
   // UpVote Replies
   const upVoteReply = (id, replId) => {
     newComments.map((c) => {
@@ -34,17 +47,6 @@ export default function Comments() {
     setComments(newComments)
   }
 
-  // DownVote Comments
-  const downVote = (id, index) => {
-    newComments.map((c) => {
-      if (id === c.id) {
-        c.point -= 1
-      }
-    })
-    setComments(newComments)
-    newVoted[index] = !newVoted[index]
-    setIsVoted(newVoted)
-  }
   // DownVote Replies
   const downVoteReply = (id, replId) => {
     newComments.map((c) => {
@@ -62,19 +64,19 @@ export default function Comments() {
   // Fetch data from API
   useEffect(() => {
     async function loadData() {
+      // fetch external api
       const response = await fetch(
         "https://my-json-server.typicode.com/hydego17/sampledata/comments"
       )
+      // get response
       const getComments = await response.json()
+      // send response to our state
       setComments(getComments)
+      // set each response to have its isVoted state (for disable button)
       setIsVoted(new Array(getComments.length).fill(false))
-
-      getComments.map((c) => {
-        if (c.replies) {
-          setIsVoted(new Array(getComments.length).fill(false))
-        }
-      })
     }
+
+    // Call the function
     loadData()
   }, [])
 
@@ -86,8 +88,10 @@ export default function Comments() {
 
       {comments
         ? comments.map((comment, index) => {
+            // Destructurin field on each comment
             const { author, date, message, point, replies, id } = comment
 
+            // Convert the date format
             const setDate = (d) => {
               return new Date(d).toLocaleString()
             }
@@ -124,7 +128,7 @@ export default function Comments() {
                 </div>
 
                 {replies
-                  ? replies.map((reply, index) => (
+                  ? replies.map((reply) => (
                       <div
                         className="reply-section"
                         id={reply.id}
