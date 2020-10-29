@@ -10,7 +10,7 @@ export default function Comments() {
   const newVoted = [...isVoted]
 
   //UpVote Comments
-  const upVote = (id, index, e) => {
+  const upVote = (id, index) => {
     newComments.map((c) => {
       if (id === c.id) {
         c.point += 1
@@ -82,6 +82,10 @@ export default function Comments() {
         ? comments.map((comment, index) => {
             const { author, date, message, point, replies, id } = comment
 
+            const setDate = (d) => {
+              return new Date(date).toLocaleString()
+            }
+
             return (
               <div className="comment_section" id={id} key={id}>
                 <div className="_cmm">
@@ -93,7 +97,7 @@ export default function Comments() {
 
                   <div>
                     <h4>{author}</h4>
-                    <small>{date}</small>
+                    <small>{setDate(date)}</small>
                     <p>{message}</p>
                     <small>{point} point</small>
                     <button
@@ -129,7 +133,7 @@ export default function Comments() {
 
                           <div>
                             <h4>{reply.author}</h4>
-                            <small>{reply.date}</small>
+                            <small>{setDate(reply.date)}</small>
                             <p>{reply.message}</p>
                             <small>{reply.point} point</small>
                             <button
