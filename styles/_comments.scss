@@ -27,12 +27,12 @@
   // btn on hover
   .btn_upvote {
     &:hover {
-      background: rgb(81, 167, 81);
+      background: $Green;
     }
   }
   .btn_downvote {
     &:hover {
-      background: rgb(255, 81, 0);
+      background: $Red;
     }
   }
 
