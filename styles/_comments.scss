@@ -1,7 +1,27 @@
-.comment-section {
+.comment_section {
   font-size: 15px;
   line-height: 1.4rem;
   padding: 0.5rem;
+
+  .btn-vote {
+    cursor: pointer;
+    margin: 1rem 0 1rem 0.3rem;
+    padding: 0.3rem 0.5rem;
+    border: 0;
+    border-radius: 2px;
+    color: $Black;
+    &:focus {
+      outline: 0;
+      border: 0;
+    }
+    &:hover {
+      background-color: $Gray;
+    }
+    &:disabled {
+      background-color: $Brown_Dark;
+      color: white;
+    }
+  }
 
   ._cmm,
   ._rpl {

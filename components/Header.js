@@ -25,12 +25,13 @@ export default function Header() {
               <p className="brand">Forum anak IT</p>
             </a>
           </Link>
+          {/* Burger Menu */}
           <div className="nav_icon">
             <HamburgerMenu
               isOpen={openMenu}
               menuClicked={handleMenu}
-              width={18}
-              height={12}
+              width={20}
+              height={14}
               strokeWidth={2}
               rotate={0}
               color="white"
