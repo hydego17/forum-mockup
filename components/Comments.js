@@ -4,30 +4,62 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function Comments() {
   const [comments, setComments] = useState([])
-  const [isVoted, setIsVoted] = useState(false)
-  const [comment, setComment] = useState({})
+  const [isVoted, setIsVoted] = useState([])
 
   const newComments = [...comments]
+  const newVoted = [...isVoted]
 
-  //UpVote function
-  const upVote = (id) => {
+  //UpVote Comments
+  const upVote = (id, index, e) => {
     newComments.map((c) => {
       if (id === c.id) {
         c.point += 1
       }
     })
     setComments(newComments)
+    newVoted[index] = !newVoted[index]
+    setIsVoted(newVoted)
   }
-  // DownVote Funtion
-  const downVote = (id) => {
+  // UpVote Replies
+  const upVoteReply = (id, replId) => {
+    newComments.map((c) => {
+      if (id === c.id) {
+        c.replies.map((r) => {
+          if (replId === r.id) {
+            r.point += 1
+          }
+        })
+      }
+    })
+    setComments(newComments)
+  }
+
+  // DownVote Comments
+  const downVote = (id, index) => {
     newComments.map((c) => {
       if (id === c.id) {
         c.point -= 1
       }
-    }, [])
+    })
+    setComments(newComments)
+    newVoted[index] = !newVoted[index]
+    setIsVoted(newVoted)
+  }
+  // DownVote Replies
+  const downVoteReply = (id, replId) => {
+    newComments.map((c) => {
+      if (id === c.id) {
+        c.replies.map((r) => {
+          if (replId === r.id) {
+            r.point -= 1
+          }
+        })
+      }
+    })
     setComments(newComments)
   }
 
+  // Fetch data from API
   useEffect(() => {
     async function loadData() {
       const response = await fetch(
@@ -35,6 +67,7 @@ export default function Comments() {
       )
       const getComments = await response.json()
       setComments(getComments)
+      setIsVoted(new Array(getComments.length).fill(false))
     }
     loadData()
   }, [])
@@ -46,7 +79,7 @@ export default function Comments() {
       </legend>
 
       {comments
-        ? comments.map((comment) => {
+        ? comments.map((comment, index) => {
             const { author, date, message, point, replies, id } = comment
 
             return (
@@ -64,16 +97,16 @@ export default function Comments() {
                     <p>{message}</p>
                     <small>{point} point</small>
                     <button
-                      disabled={isVoted}
-                      className="btn-vote"
-                      onClick={() => upVote(id)}
+                      disabled={isVoted[index]}
+                      className="btn_upvote"
+                      onClick={() => upVote(id, index)}
                     >
                       <FontAwesomeIcon icon={faAngleUp} />
                     </button>
                     <button
-                      disabled={isVoted}
-                      className="btn-vote"
-                      onClick={() => downVote(id)}
+                      disabled={isVoted[index]}
+                      className="btn_downvote"
+                      onClick={() => downVote(id, index)}
                     >
                       <FontAwesomeIcon icon={faAngleDown} />
                     </button>
@@ -99,10 +132,16 @@ export default function Comments() {
                             <small>{reply.date}</small>
                             <p>{reply.message}</p>
                             <small>{reply.point} point</small>
-                            <button className="btn-vote">
+                            <button
+                              className="btn_upvote"
+                              onClick={() => upVoteReply(id, reply.id)}
+                            >
                               <FontAwesomeIcon icon={faAngleUp} />
                             </button>
-                            <button className="btn-vote">
+                            <button
+                              className="btn_downvote"
+                              onClick={() => downVoteReply(id, reply.id)}
+                            >
                               <FontAwesomeIcon icon={faAngleDown} />
                             </button>
                           </div>
