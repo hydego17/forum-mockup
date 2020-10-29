@@ -83,7 +83,7 @@ export default function Comments() {
             const { author, date, message, point, replies, id } = comment
 
             const setDate = (d) => {
-              return new Date(date).toLocaleString()
+              return new Date(d).toLocaleString()
             }
 
             return (
