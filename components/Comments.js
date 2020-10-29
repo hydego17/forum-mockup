@@ -68,6 +68,12 @@ export default function Comments() {
       const getComments = await response.json()
       setComments(getComments)
       setIsVoted(new Array(getComments.length).fill(false))
+
+      getComments.map((c) => {
+        if (c.replies) {
+          setIsVoted(new Array(getComments.length).fill(false))
+        }
+      })
     }
     loadData()
   }, [])
@@ -118,7 +124,7 @@ export default function Comments() {
                 </div>
 
                 {replies
-                  ? replies.map((reply) => (
+                  ? replies.map((reply, index) => (
                       <div
                         className="reply-section"
                         id={reply.id}

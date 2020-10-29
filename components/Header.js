@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import Modal from "./Modal"
+import Register from "./Register"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import HamburgerMenu from "react-hamburger-menu"
@@ -11,9 +12,15 @@ export default function Header() {
     setOpenMenu(!openMenu)
   }
 
+  // State for login button
   const [openModal, setOpenModal] = React.useState(false)
   const handleModal = () => {
     setOpenModal(!openModal)
+  }
+  // State for register button
+  const [openRegister, setOpenRegister] = React.useState(false)
+  const handleRegister = () => {
+    setOpenRegister(!openRegister)
   }
 
   return (
@@ -63,12 +70,10 @@ export default function Header() {
             </div>
 
             <li>
-              {" "}
               <a onClick={handleModal}>login</a>
             </li>
             <li>
-              {" "}
-              <a href="#">Contact</a>
+              <a onClick={handleRegister}>Register</a>
             </li>
           </ul>
         </div>
@@ -96,8 +101,8 @@ export default function Header() {
             <a onClick={handleModal}>
               <li>login</li>
             </a>
-            <a href="#">
-              <li> Contact </li>
+            <a onClick={handleRegister}>
+              <li> Register </li>
             </a>
           </ul>
         </div>
@@ -105,6 +110,8 @@ export default function Header() {
 
       {/* Login Modal */}
       <Modal openModal={openModal} setOpenModal={setOpenModal} />
+      {/* Register Modal */}
+      <Register openRegister={openRegister} setOpenRegister={setOpenRegister} />
     </>
   )
 }

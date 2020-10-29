@@ -34,10 +34,7 @@ img {
 }
 
 hr {
-  float: right;
-  width: 80%;
-  transform: translateY(-30px);
-  border: 1px solid $Gray_Light;
+  border: 1px solid $Gray;
 }
 
 ul {
@@ -58,10 +55,6 @@ h2 {
 h3 {
   font-size: 1.2rem;
   padding: 0 1rem 1rem 0;
-}
-
-form {
-  width: 100%;
 }
 
 .flex {

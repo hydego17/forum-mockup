@@ -1,26 +1,41 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 
-export default function Modal({ openModal, setOpenModal }) {
+export default function Modal({ openRegister, setOpenRegister }) {
   // Form Validation
   const { register, handleSubmit, errors } = useForm()
   const onSubmit = (data) => console.log(data)
 
   // Handle toggle modal
-  const handleModal = () => {
-    setOpenModal(!openModal)
+  const handleRegister = () => {
+    setOpenRegister(!openRegister)
   }
   return (
-    <div style={{ display: openModal ? `block` : `none` }} className="modal">
+    <div style={{ display: openRegister ? `block` : `none` }} className="modal">
       <form className="modal-content animate" onSubmit={handleSubmit(onSubmit)}>
-        <h2>Login</h2>
+        <h2>Register</h2>
 
-        <span onClick={handleModal} className="close" title="Close Modal">
+        <span onClick={handleRegister} className="close" title="Close Modal">
           &times;
         </span>
 
+        {/* Input nama */}
         <div className="modal-container">
-          {/* Input password */}
+          <label htmlFor="name">
+            <b>Name</b>
+          </label>
+          {errors.nameRequired && (
+            <small className="errors-login">Harap masukan nama</small>
+          )}
+
+          <input
+            name="nameRequired"
+            type="text"
+            placeholder="Enter name"
+            ref={register({ required: true })}
+          />
+
+          {/* Input email */}
           <label htmlFor="email">
             <b>Email</b>
           </label>
