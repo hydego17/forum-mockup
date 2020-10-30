@@ -1,5 +1,5 @@
 ## Suitmedia Test
 
-Desc:
-Framework: Next.JS (React)
-CSS PrePocessor: Sass
+**Desc:**  
+**Framework: Next.JS (React)**  
+**CSS PrePocessor: Sass**
