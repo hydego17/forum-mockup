@@ -9,11 +9,11 @@ export default function Comments() {
   const newComments = [...comments]
 
   //Handle Comments function
-  const handleComment = (id, index, vote) => {
+  const handleComment = (id, vote) => {
     newComments.map((c) => {
       if (id === c.id) {
         c.point = vote === "upVote" ? c.point + 1 : c.point - 1
-        c.isRated = true
+        c.isVoted = true
       }
     })
     setComments(newComments)
@@ -26,7 +26,7 @@ export default function Comments() {
         c.replies.map((r) => {
           if (replId === r.id) {
             r.point = vote === "upVote" ? r.point + 1 : r.point - 1
-            r.isRated = true
+            r.isVoted = true
           }
         })
       }
@@ -49,12 +49,12 @@ export default function Comments() {
       const initialComments = [...getComments]
 
       initialComments.map((comment) => {
-        comment.isRated = false
+        comment.isVoted = false
 
         const { replies } = comment
 
         if (replies.length > 0) {
-          replies.map((r) => (r.isRated = false))
+          replies.map((r) => (r.isVoted = false))
         }
       })
 
@@ -78,7 +78,7 @@ export default function Comments() {
       ) : comments ? (
         comments.map((comment, index) => {
           // Destructurin field on each comment
-          const { author, date, message, point, replies, id, isRated } = comment
+          const { author, date, message, point, replies, id, isVoted } = comment
 
           // Convert the date format
           const setDate = (d) => {
@@ -100,16 +100,16 @@ export default function Comments() {
                   <p>{message}</p>
                   <small>{point} point</small>
                   <button
-                    disabled={isRated}
+                    disabled={isVoted}
                     className="btn_upvote"
-                    onClick={() => handleComment(id, index, "upVote")}
+                    onClick={() => handleComment(id, "upVote")}
                   >
                     <FontAwesomeIcon icon={faAngleUp} />
                   </button>
                   <button
-                    disabled={isRated}
+                    disabled={isVoted}
                     className="btn_downvote"
-                    onClick={() => handleComment(id, index, "downVote")}
+                    onClick={() => handleComment(id, "downVote")}
                   >
                     <FontAwesomeIcon icon={faAngleDown} />
                   </button>
@@ -132,14 +132,14 @@ export default function Comments() {
                           <p>{reply.message}</p>
                           <small>{reply.point} point</small>
                           <button
-                            disabled={reply.isRated}
+                            disabled={reply.isVoted}
                             className="btn_upvote"
                             onClick={() => handleReply(id, reply.id, "upVote")}
                           >
                             <FontAwesomeIcon icon={faAngleUp} />
                           </button>
                           <button
-                            disabled={reply.isRated}
+                            disabled={reply.isVoted}
                             className="btn_downvote"
                             onClick={() =>
                               handleReply(id, reply.id, "downVote")

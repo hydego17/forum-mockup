@@ -25,6 +25,10 @@ aside {
 
   li {
     padding: 0.2rem;
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
   h3 {
