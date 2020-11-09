@@ -8,6 +8,7 @@ import HamburgerMenu from "react-hamburger-menu"
 
 export default function Header() {
   const [openMenu, setOpenMenu] = React.useState(false)
+
   const handleMenu = () => {
     setOpenMenu(!openMenu)
   }

@@ -3,57 +3,30 @@ import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function Comments() {
+  const [loading, setLoading] = useState(true)
   const [comments, setComments] = useState([])
-  const [isVoted, setIsVoted] = useState([])
 
   const newComments = [...comments]
-  const newVoted = [...isVoted]
 
-  //UpVote Comments
-  const upVote = (id, index) => {
+  //Handle Comments function
+  const handleComment = (id, index, vote) => {
     newComments.map((c) => {
       if (id === c.id) {
-        c.point += 1
+        c.point = vote === "upVote" ? c.point + 1 : c.point - 1
+        c.isRated = true
       }
     })
     setComments(newComments)
-    newVoted[index] = !newVoted[index]
-    setIsVoted(newVoted)
   }
 
-  // DownVote Comments
-  const downVote = (id, index) => {
-    newComments.map((c) => {
-      if (id === c.id) {
-        c.point -= 1
-      }
-    })
-    setComments(newComments)
-    newVoted[index] = !newVoted[index]
-    setIsVoted(newVoted)
-  }
-
-  // UpVote Replies
-  const upVoteReply = (id, replId) => {
+  // Handle Replies function
+  const handleReply = (id, replId, vote) => {
     newComments.map((c) => {
       if (id === c.id) {
         c.replies.map((r) => {
           if (replId === r.id) {
-            r.point += 1
-          }
-        })
-      }
-    })
-    setComments(newComments)
-  }
-
-  // DownVote Replies
-  const downVoteReply = (id, replId) => {
-    newComments.map((c) => {
-      if (id === c.id) {
-        c.replies.map((r) => {
-          if (replId === r.id) {
-            r.point -= 1
+            r.point = vote === "upVote" ? r.point + 1 : r.point - 1
+            r.isRated = true
           }
         })
       }
@@ -63,6 +36,7 @@ export default function Comments() {
 
   // Fetch data from API
   useEffect(() => {
+    setLoading(true)
     async function loadData() {
       // fetch external api
       const response = await fetch(
@@ -70,12 +44,23 @@ export default function Comments() {
       )
       // get response
       const getComments = await response.json()
-      // send response to our state
-      setComments(getComments)
-      // set each response to have its isVoted state (for disable button)
-      setIsVoted(new Array(getComments.length).fill(false))
-    }
 
+      // store response into state
+      const initialComments = [...getComments]
+
+      initialComments.map((comment) => {
+        comment.isRated = false
+
+        const { replies } = comment
+
+        if (replies.length > 0) {
+          replies.map((r) => (r.isRated = false))
+        }
+      })
+
+      setComments(initialComments)
+      setLoading(false)
+    }
     // Call the function
     loadData()
   }, [])
@@ -86,87 +71,93 @@ export default function Comments() {
         <h2>Komentar</h2>
       </legend>
 
-      {comments
-        ? comments.map((comment, index) => {
-            // Destructurin field on each comment
-            const { author, date, message, point, replies, id } = comment
+      {loading ? (
+        <p>
+          <em>Sedang memuat komentar...</em>
+        </p>
+      ) : comments ? (
+        comments.map((comment, index) => {
+          // Destructurin field on each comment
+          const { author, date, message, point, replies, id, isRated } = comment
 
-            // Convert the date format
-            const setDate = (d) => {
-              return new Date(d).toLocaleString()
-            }
+          // Convert the date format
+          const setDate = (d) => {
+            return new Date(d).toLocaleString()
+          }
 
-            return (
-              <div className="comment_section" id={id} key={id}>
-                <div className="_cmm">
-                  <img
-                    className="img1"
-                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                    alt="profile-photo"
-                  />
+          return (
+            <div className="comment_section" id={id} key={id}>
+              <div className="_cmm">
+                <img
+                  className="img1"
+                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                  alt="profile-photo"
+                />
 
-                  <div>
-                    <h4>{author}</h4>
-                    <small>{setDate(date)}</small>
-                    <p>{message}</p>
-                    <small>{point} point</small>
-                    <button
-                      disabled={isVoted[index]}
-                      className="btn_upvote"
-                      onClick={() => upVote(id, index)}
-                    >
-                      <FontAwesomeIcon icon={faAngleUp} />
-                    </button>
-                    <button
-                      disabled={isVoted[index]}
-                      className="btn_downvote"
-                      onClick={() => downVote(id, index)}
-                    >
-                      <FontAwesomeIcon icon={faAngleDown} />
-                    </button>
-                  </div>
+                <div>
+                  <h4>{author}</h4>
+                  <small>{setDate(date)}</small>
+                  <p>{message}</p>
+                  <small>{point} point</small>
+                  <button
+                    disabled={isRated}
+                    className="btn_upvote"
+                    onClick={() => handleComment(id, index, "upVote")}
+                  >
+                    <FontAwesomeIcon icon={faAngleUp} />
+                  </button>
+                  <button
+                    disabled={isRated}
+                    className="btn_downvote"
+                    onClick={() => handleComment(id, index, "downVote")}
+                  >
+                    <FontAwesomeIcon icon={faAngleDown} />
+                  </button>
                 </div>
+              </div>
 
-                {replies
-                  ? replies.map((reply) => (
-                      <div
-                        className="reply-section"
-                        id={reply.id}
-                        key={reply.id}
-                      >
-                        <div className="_rpl">
-                          <img
-                            className="img2"
-                            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                            alt="profile-photo"
-                          />
+              {replies
+                ? replies.map((reply) => (
+                    <div className="reply-section" id={reply.id} key={reply.id}>
+                      <div className="_rpl">
+                        <img
+                          className="img2"
+                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                          alt="profile-photo"
+                        />
 
-                          <div>
-                            <h4>{reply.author}</h4>
-                            <small>{setDate(reply.date)}</small>
-                            <p>{reply.message}</p>
-                            <small>{reply.point} point</small>
-                            <button
-                              className="btn_upvote"
-                              onClick={() => upVoteReply(id, reply.id)}
-                            >
-                              <FontAwesomeIcon icon={faAngleUp} />
-                            </button>
-                            <button
-                              className="btn_downvote"
-                              onClick={() => downVoteReply(id, reply.id)}
-                            >
-                              <FontAwesomeIcon icon={faAngleDown} />
-                            </button>
-                          </div>
+                        <div>
+                          <h4>{reply.author}</h4>
+                          <small>{setDate(reply.date)}</small>
+                          <p>{reply.message}</p>
+                          <small>{reply.point} point</small>
+                          <button
+                            disabled={reply.isRated}
+                            className="btn_upvote"
+                            onClick={() => handleReply(id, reply.id, "upVote")}
+                          >
+                            <FontAwesomeIcon icon={faAngleUp} />
+                          </button>
+                          <button
+                            disabled={reply.isRated}
+                            className="btn_downvote"
+                            onClick={() =>
+                              handleReply(id, reply.id, "downVote")
+                            }
+                          >
+                            <FontAwesomeIcon icon={faAngleDown} />
+                          </button>
                         </div>
                       </div>
-                    ))
-                  : ""}
-              </div>
-            )
-          })
-        : "Tidak ada commentar"}
+                    </div>
+                  ))
+                : ""}
+            </div>
+          )
+        })
+      ) : (
+        "Tidak ada commentar"
+      )}
     </fieldset>
   )
 }

@@ -1,5 +1,7 @@
 main {
-  border-right: $Border;
+  @media screen and(min-width: 1023px) {
+    border-right: $Border;
+  }
 
   article {
     padding-right: 20px;
